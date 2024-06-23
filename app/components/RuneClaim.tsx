@@ -12,7 +12,7 @@ function RuneClaim() {
   const [round, setRound] = useState(0);
   const [claimRound, setClaimRound] = useState(0);
   const [settingRound, setSettingRound] = useState(0);
-  const [addresses, setAddresses] = useState<string[]>([]);
+  const [addresses, setAddresses] = useState<EthereumAddress[]>([]);
   const [deleteRound, setDeleteRound] = useState(0);
   const [deleteAddress, setDeleteAddress] = useState("");
   const [amount, setAmount] = useState(0);
