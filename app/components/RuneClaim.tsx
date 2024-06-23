@@ -205,7 +205,7 @@ function RuneClaim() {
                   method: "removeFromWhitelist",
                   params: [
                     BigInt(deleteRound),
-                    deleteAddress ? deleteAddress : "",
+                    deleteAddress ? deleteAddress : "0x00",
                   ],
                 })
               }
