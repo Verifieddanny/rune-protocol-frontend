@@ -290,8 +290,8 @@ function RuneClaim() {
               transaction={() =>
                 prepareContractCall({
                   contract: CONTRACT,
-                  method: "removeFromWhitelist",
-                  params: [BigInt(settingRound), settingFee.toString()],
+                  method: "setServiceFee",
+                  params: [BigInt(settingRound), BigInt(settingFee)],
                 })
               }
               //   onTransactionConfirmed={onPurchase}
