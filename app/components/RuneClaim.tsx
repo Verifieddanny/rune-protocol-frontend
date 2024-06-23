@@ -203,7 +203,10 @@ function RuneClaim() {
                 prepareContractCall({
                   contract: CONTRACT,
                   method: "removeFromWhitelist",
-                  params: [BigInt(deleteRound), deleteAddress ?? ""],
+                  params: [
+                    BigInt(deleteRound),
+                    deleteAddress ? deleteAddress : "",
+                  ],
                 })
               }
               //   onTransactionConfirmed={onPurchase}
