@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+type EthereumAddress = `0x${string}`;
 function RuneClaim() {
   const [fee, setFee] = useState(0);
   const [settingFee, setSettingFee] = useState(0);
@@ -15,6 +16,18 @@ function RuneClaim() {
   const [deleteRound, setDeleteRound] = useState(0);
   const [deleteAddress, setDeleteAddress] = useState("");
   const [amount, setAmount] = useState(0);
+
+  const isValidAddress = (address: string): address is EthereumAddress => {
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  };
+
+  const handleAddressesChange = (input: string) => {
+    const inputAddresses = input.split(",").map((a) => a.trim());
+    const validAddresses = inputAddresses.filter(
+      isValidAddress
+    ) as EthereumAddress[];
+    setAddresses(validAddresses);
+  };
 
   const {
     data: totalSupply,
@@ -108,9 +121,7 @@ function RuneClaim() {
                 value={addresses.join(", ")}
                 className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-6"
                 placeholder="enter addresses. Ex : 0x... , 0x..."
-                onChange={(e) =>
-                  setAddresses(e.target.value.split(",").map((a) => a.trim()))
-                }
+                onChange={(e) => handleAddressesChange(e.target.value)}
               />
             </div>
           </div>
