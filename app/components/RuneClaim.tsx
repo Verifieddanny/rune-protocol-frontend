@@ -19,8 +19,9 @@ function RuneClaim() {
   const [settingRound, setSettingRound] = useState(0);
   const [addresses, setAddresses] = useState<EthereumAddress[]>([]);
   const [deleteRound, setDeleteRound] = useState(0);
-
-  const [deleteAddress, setDeleteAddress] = useState<EthereumAddress | "">("");
+  const [deleteAddress, setDeleteAddress] = useState<EthereumAddress | null>(
+    null
+  );
 
   const [amount, setAmount] = useState(0);
 
@@ -45,7 +46,7 @@ function RuneClaim() {
     if (isValidAddress(input.trim())) {
       setDeleteAddress(input.trim() as EthereumAddress);
     } else {
-      setDeleteAddress("");
+      setDeleteAddress(null);
     }
   };
 
@@ -189,7 +190,7 @@ function RuneClaim() {
                 type="text"
                 name="addresses"
                 id="addresses"
-                value={deleteAddress}
+                value={deleteAddress ?? ""}
                 className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-6"
                 placeholder="Enter The Address to be deleted"
                 onChange={(e) => handleDeleteAddressChange(e.target.value)}
@@ -202,7 +203,7 @@ function RuneClaim() {
                 prepareContractCall({
                   contract: CONTRACT,
                   method: "removeFromWhitelist",
-                  params: [BigInt(deleteRound), deleteAddress],
+                  params: [BigInt(deleteRound), deleteAddress ?? ""],
                 })
               }
               //   onTransactionConfirmed={onPurchase}
